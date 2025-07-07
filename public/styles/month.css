@@ -1,0 +1,204 @@
+h1 {
+    text-align: center;
+    font-size: 56px;
+    color: #000097;
+    text-decoration: underline;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.calendar-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.day-header {
+    font-weight: bold;
+    text-align: center;
+    background-color: #65bfff;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.day-header:nth-child(6),
+.day-header:nth-child(7) {
+    background-color: #000097;
+    color: #fff;
+}
+
+.day-cell {
+    border: 1px solid #ddd;
+    min-height: 200px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    background-color: #fff;
+}
+
+.day {
+    font-size: 32px;
+    color: #333333;
+}
+
+.event {
+    font-size: 20px;
+    margin: 2px 0;
+    color: #333;
+}
+
+.today {
+    background-color: #f3b4c1;
+    border: 2px solid #4caf50;
+}
+
+.empty {
+    background-color: #f9f9f9;
+}
+
+.zone-flag {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    color: #fff;
+    font-size: 24px;
+}
+
+.band {
+    flex: 1;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zone-a {
+    background-color: #99ccff;
+}
+
+.zone-b {
+    background-color: #073357;
+}
+
+.zone-c {
+    background-color: #ff99cc;
+}
+
+.zone-container {
+    color: #F5F5F5;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.zone-container p{
+    background-color: #aaaae8;
+    padding: 10px;
+}
+
+.holiday {
+    background-color: #ffefde;
+    border-color: #ff6f00;
+}
+
+.saint {
+    color: #795548;
+    background-color: #f4d0c8;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.ferie {
+    color: #795548;
+    font-weight: bold;
+    text-align: center;
+    background-color: #f4eeb1;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.vacances {
+    color: #795548;
+    font-weight: bold;
+    background-color: #65bfff;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.jourferie {
+    background-color: gold;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.periode {
+    background-color: #65bfff;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.info-container {
+    margin-top: 50px;
+    border: 2px solid #ddd;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .calendar-container {
+        max-width: 700px;
+    }
+    .day-cell {
+        min-height: 150px;
+    }
+    .day-header {
+        font-size: 16px;
+        padding: 8px;
+    }
+    .day {
+        font-size: 24px;
+    }
+    .event {
+        font-size: 16px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        width: 480px;
+    }
+
+    .calendar-container {
+        max-width: 100%;
+    }
+    .day-cell {
+        min-height: 120px;
+    }
+    .day-header {
+        font-size: 14px;
+        padding: 5px;
+    }
+    .day {
+        font-size: 20px;
+    }
+    .event {
+        font-size: 14px;
+    }
+    .info-container {
+        width: 90%;
+        margin-top: 20px;
+    }
+}

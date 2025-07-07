@@ -1,0 +1,19 @@
+body {
+    font-family: "Cormorant Garamond", serif;
+    margin: 0;
+}
+
+.footer {
+    background-color: #65bfff;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    color: #f8f7f7;
+    margin-top: 50px;
+}
+
+.footer a {
+    color: #f8f7f7;
+    text-decoration: none;
+    font-weight: bold;
+}

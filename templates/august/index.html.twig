@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mois d'Août{% endblock %}
+
+{% block body %}
+    <h1>Mois d'Août</h1>
+
+    <div class="calendar-container">
+        <div class="day-header">Lundi</div>
+        <div class="day-header">Mardi</div>
+        <div class="day-header">Mercredi</div>
+        <div class="day-header">Jeudi</div>
+        <div class="day-header">Vendredi</div>
+        <div class="day-header">Samedi</div>
+        <div class="day-header">Dimanche</div>
+
+        {% set current_day = 1 %}
+        {% set first_day_of_month = first_day_of_month|default(1) %}
+        {% for _ in range(1, first_day_of_month - 1) %}
+            <div class="day-cell empty"></div>
+        {% endfor %}
+
+        {% for day in month_data %}
+            <div class="day-cell {{ day.date == 'now'|date('Y-m-d') ? 'today' : '' }}">
+                <strong class="day">{{ day.date|date("d") }}</strong>
+
+                {% if day.saints %}
+                    <div class="event saint">
+                        {{ day.saints|join(', ') }}
+                    </div>
+                {% endif %}
+
+                {% if day.jours_feries %}
+                    <div class="event ferie">{{ day.jours_feries|join(', ') }}</div>
+                {% endif %}
+
+                {% if day.vacances %}
+                    <div class="event vacances">{{ day.vacances|join(', ') }}</div>
+                    <div class="event zone">
+                        {% if day.zone %}
+                            {% set zones = day.zone|split(', ') %}
+                            {% if zones|length in [1, 2, 3] %}
+                                <div class="zone-flag">
+                                    {% for single_zone in zones %}
+                                        <div class="band zone-{{ single_zone|lower }}">{{ single_zone }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <span class="zone-{{ zones[0]|lower }}"></span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            {% set current_day = current_day + 1 %}
+        {% endfor %}
+
+
+        {% set remaining_cells = (7 - (current_day - -1) % 7) %}
+        {% if remaining_cells < 7 %}
+            {% for _ in range(1, remaining_cells) %}
+                <div class="day-cell empty"></div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {% set zones_academies = {
+        'A': 'Besançon, Bordeaux, Clermont-Ferrand, Dijon, Grenoble, Limoges, Lyon, Poitiers',
+        'B': 'Aix-Marseille, Amiens, Caen, Lille, Nancy-Metz, Nantes, Nice, Orléans-Tours, Reims, Rennes, Rouen, Strasbourg',
+        'C': 'Créteil, Montpellier, Paris, Toulouse, Versailles'
+    } %}
+
+    <div class="info-container">
+        <div class="zone-container jourferie">
+            Jour Férié
+        </div>
+        <div class="zone-container periode">
+            Les Périodes de vacances
+        </div>
+        {% for zone, academies in zones_academies %}
+            <div class="zone-{{ zone|lower }} zone-container">
+                Zone {{ zone }} : Académies : {{ academies }}
+            </div>
+        {% endfor %}
+        <div class="zone-container">
+            <p>Calendrier lunaire 2025 : 🌑 Nouvelle Lune 🌓 Premier Quartier 🌕 Pleine Lune 🌗 Dernier Quartier</p>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier 2025{% endblock %}
+
+{% block body %}
+    <h1>Calendrier 2025</h1>
+
+    <div class="calendar-container-year">
+        {% for month, days in year_data %}
+            <div class="month">
+                {% set months = {
+                    "January": "Janvier",
+                    "February": "Février",
+                    "March": "Mars",
+                    "April": "Avril",
+                    "May": "Mai",
+                    "June": "Juin",
+                    "July": "Juillet",
+                    "August": "Août",
+                    "September": "Septembre",
+                    "October": "Octobre",
+                    "November": "Novembre",
+                    "December": "Décembre"
+                } %}
+                <div class="month-header">{{ months[month] }}</div>
+                <div class="month-grid">
+                    {% for day in days %}
+                        <div class="day-day {{ day.date == 'now'|date('Y-m-d') ? 'day-today' : '' }}">
+                            {% set isWeekend = day.date|date('N') in [6, 7] %}
+                            {% set isHoliday = day.jours_feries|length > 0 %}
+
+                            <div class="day-header-container {{ isHoliday ? 'feries' : '' }} {{ isWeekend ? 'weekend' : '' }}">
+                                <div class="day-number">
+                                    <p class="text-day">{{ day.date|localized_date('fr_FR')|replace({'janvier': 'Janvier', 'février': 'Février', 'mars': 'Mars', 'avril': 'Avril', 'mai': 'Mai', 'juin': 'Juin', 'juillet': 'Juillet', 'août': 'Août', 'septembre': 'Septembre', 'octobre': 'Octobre', 'novembre': 'Novembre', 'décembre': 'Décembre', 'lundi': 'Lundi', 'mardi': 'Mardi', 'mercredi': 'Mercredi', 'jeudi': 'Jeudi', 'vendredi': 'Vendredi', 'samedi': 'Samedi', 'dimanche': 'Dimanche'}) }}</p>
+                                    <p>{{ day.saints|join(', ') }}</p>
+                                    {% if day.jours_feries|length > 0 %}
+                                        <p class="text_ferie">{{ day.jours_feries|join(', ') }}</p>
+                                    {% endif %}
+                                </div>
+                                {% if day.vacances %}
+                                    <div>
+                                        {% if day.zone %}
+                                            {% set zones = day.zone|split(', ') %}
+                                            <div class="zone-flag">
+                                                {% for single_zone in zones %}
+                                                    <div class="zone-color zone-{{ single_zone|lower }}"></div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% set zones_academies = {
+        'A': 'Besançon, Bordeaux, Clermont-Ferrand, Dijon, Grenoble, Limoges, Lyon, Poitiers',
+        'B': 'Aix-Marseille, Amiens, Caen, Lille, Nancy-Metz, Nantes, Nice, Orléans-Tours, Reims, Rennes, Rouen, Strasbourg',
+        'C': 'Créteil, Montpellier, Paris, Toulouse, Versailles'
+    } %}
+
+    <div class="info-container">
+        <div class="zone-container jourferie">
+            Jour Férié
+        </div>
+        <div class="zone-container periode">
+            Les Périodes de vacances
+        </div>
+        {% for zone, academies in zones_academies %}
+            <div class="zone-{{ zone|lower }} zone-container">
+                Zone {{ zone }} : Académies : {{ academies }}
+            </div>
+        {% endfor %}
+        <div class="zone-container">
+            <p>C'est une année commune, elle comporte 365 jours.</p>
+
+            <p>En 2025, il y a 304 jours ouvrables et 252 jours ouvrés.</p>
+
+            <p>Calendrier lunaire 2025 : 🌑 Nouvelle Lune 🌓 Premier Quartier 🌕 Pleine Lune 🌗 Dernier Quartier</p>
+        </div>
+    </div>
+{% endblock %}

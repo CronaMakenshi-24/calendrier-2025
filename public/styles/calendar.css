@@ -1,0 +1,82 @@
+.calendar-container-year {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f3f3f3;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.month {
+    display: flex;
+    flex-direction: column;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.month-header {
+    background-color: #0073e6;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.day-header-container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+    font-size: 12px;
+    height: 50px;
+}
+
+.day-header-container.feries {
+    background-color: #f4eeb1;
+}
+
+.day-header-container.weekend {
+    background-color: #65bfff;
+}
+
+.day-header-container.feries.weekend {
+    background: linear-gradient(90deg, #f4eeb1 50%, #65bfff 50%);
+}
+
+.text_ferie, .text-day {
+    font-weight: 900;
+}
+
+.day-number {
+    margin-left: 5px;
+}
+
+.day-number p {
+    margin: 2px;
+}
+
+.zone-color {
+    width: 20px;
+    height: 52px;
+    display: inline-block;
+}
+
+.day-day {
+    background-color: #f8f7f7;
+}
+
+.day-today {
+    background-color: #f18fd1;
+}
+
+@media (max-width: 768px) {
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

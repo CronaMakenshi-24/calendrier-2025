@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Calendrier 2025 - Planning Annuel et Mensuel{% endblock %}</title>
+
+    <meta name="description" content="{% block meta_description %}Découvrez le calendrier 2025 avec tous les mois détaillés et des liens vers chaque période de l'année. Planifiez votre année dès maintenant !{% endblock %}">
+
+    <meta name="keywords" content="calendrier 2025, planning annuel, mois 2025, janvier, février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre, planification, organisation">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>📅</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+    <meta property="og:title" content="Calendrier 2025 - Planifiez votre année">
+    <meta property="og:description" content="Tous les mois de l'année 2025 disponibles avec des liens directs vers chaque période.">
+    <meta property="og:image" content="{{ asset('images/calendar-preview-2025.png') }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calendrier 2025 - Planning Annuel et Mensuel">
+    <meta name="twitter:description" content="Découvrez les informations détaillées mois par mois pour l'année 2025.">
+    <meta name="twitter:image" content="{{ asset('images/Calendrier-2025.png') }}">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/month.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/calendar.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+</head>
+    <body>
+    <div class="navbar">
+        {% set months = {
+            'Année': 'app_year',
+            'Janvier': 'app_january',
+            'Février': 'app_february',
+            'Mars': 'app_march',
+            'Avril': 'app_april',
+            'Mai': 'app_may',
+            'Juin': 'app_june',
+            'Juillet': 'app_july',
+            'Août': 'app_august',
+            'Septembre': 'app_september',
+            'Octobre': 'app_october',
+            'Novembre': 'app_november',
+            'Décembre': 'app_december'
+        } %}
+
+        {% for month, route in months %}
+            <div class="tab {% if app.request.get('_route') == route %}active{% endif %}">
+                <a href="{{ path(route) }}">{{ month }}</a>
+            </div>
+        {% endfor %}
+    </div>
+        {% block body %}{% endblock %}
+    </body>
+    <footer class="footer">
+        <p>Créer par <a href="https://www.goldfishweb.fr/">Goldfishweb</a></p>
+    </footer>
+</html>
